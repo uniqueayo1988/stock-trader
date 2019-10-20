@@ -4,7 +4,7 @@
       <div class="card-header bg-muted">
         <h4>
           {{stock.name}}
-          <small>(Price: {{stock.price}})</small>
+          <small>(Price: {{stock.price}} | Quantity: {{stock.quantity}})</small>
         </h4>
       </div>
       <div class="card-body">
@@ -12,7 +12,7 @@
           <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
         </div>
         <div class="float-right">
-          <button class="btn btn-success" @click="buyStock" :disabled="quantity <= 0 || Number.isInteger(quantity)">Buy</button>
+          <button class="btn btn-success" @click="sellStock" :disabled="quantity <= 0 || Number.isInteger(quantity)">Sell</button>
         </div>
       </div>
     </div>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: ['stock'],
   data () {
@@ -28,16 +30,18 @@ export default {
     }
   },
   methods: {
-    buyStock () {
+    ...mapActions([
+      'sellStock'
+    ]),
+    sellStock () {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity
       }
       // eslint-disable-next-line no-console
-      console.log(order, '.....order')
-      this.$store.dispatch('buyStock', order)
-      this.quantity = 0
+      console.log(order, '...ord')
+      this.sellStock()
     }
   }
 }
