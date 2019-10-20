@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-6 col-md-4 mt-4">
     <div class="card">
-      <div class="card-header bg-muted">
+      <div class="card-header bg-secondary text-light">
         <h4>
           {{stock.name}}
           <small>(Price: {{stock.price}} | Quantity: {{stock.quantity}})</small>
@@ -12,7 +12,7 @@
           <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
         </div>
         <div class="float-right">
-          <button class="btn btn-success" @click="sellStock" :disabled="quantity <= 0 || Number.isInteger(quantity)">Sell</button>
+          <button class="btn btn-success" @click="sellPortStock" :disabled="quantity <= 0 || Number.isInteger(quantity)">Sell</button>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@ export default {
     ...mapActions([
       'sellStock'
     ]),
-    sellStock () {
+    sellPortStock () {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
@@ -41,7 +41,8 @@ export default {
       }
       // eslint-disable-next-line no-console
       console.log(order, '...ord')
-      this.sellStock()
+      this.sellStock(order)
+      this.quantity = 0
     }
   }
 }
