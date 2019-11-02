@@ -45,7 +45,7 @@
           </div>
         </div>
         <div>
-          <span class="av-item mr-sm-2 strong-text">Funds: {{funds}}</span>
+          <span class="av-item mr-sm-2 strong-text">Funds: {{funds | currency}}</span>
         </div>
       </div>
     </div>

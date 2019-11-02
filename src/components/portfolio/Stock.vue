@@ -7,12 +7,12 @@
           <small>(Price: {{stock.price}} | Quantity: {{stock.quantity}})</small>
         </h4>
       </div>
-      <div class="card-body">
-        <div class="float-left">
-          <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
+      <div class="card-body row">
+        <div class="col-md-6">
+          <input type="number" class="form-control" placeholder="Quantity" v-model="quantity" :class="{danger: insufficientFunds}">
         </div>
-        <div class="float-right">
-          <button class="btn btn-success" @click="sellPortStock" :disabled="quantity <= 0 || Number.isInteger(quantity)">Sell</button>
+        <div class="col-md-6" style="text-align: right">
+          <button class="btn btn-success" @click="sellPortStock" :disabled="insufficientQuantity || quantity <= 0 || Number.isInteger(quantity)">{{insufficientQuantity ? 'Not enough Stocks' : 'Sell'}}</button>
         </div>
       </div>
     </div>
@@ -27,6 +27,11 @@ export default {
   data () {
     return {
       quantity: 0
+    }
+  },
+  computed: {
+    insufficientQuantity () {
+      return this.quantity > this.stock.quantity
     }
   },
   methods: {
@@ -47,3 +52,10 @@ export default {
   }
 }
 </script>
+
+<style scoped="">
+  .danger {
+    border: 1px solid red;
+  }
+</style>
+
