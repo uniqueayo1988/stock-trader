@@ -44,7 +44,20 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </div>
+        <div>
+          <span class="av-item mr-sm-2 strong-text">Funds: {{funds}}</span>
+        </div>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+  export default {
+    computed: {
+      funds () {
+        return this.$store.getters.funds
+      }
+    }
+  }
+</script>
