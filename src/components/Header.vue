@@ -30,9 +30,9 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form> -->
       <div class="form-inline my-2 my-lg-0">
-        <router-link to="/portfolio" class="nav-item mr-sm-2" activeClass="active">
-          <a class="nav-link">Portfolio <span class="sr-only">(current)</span></a>
-        </router-link>
+        <div class="nav-item mr-sm-2" activeClass="active">
+          <a class="nav-link" @click="endDay">End Day <span class="sr-only">(current)</span></a>
+        </div>
         <div class="nav-item dropdown my-2 my-sm-0">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Save & Load
@@ -53,10 +53,21 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
+
   export default {
+
     computed: {
       funds () {
         return this.$store.getters.funds
+      }
+    },
+    methods: {
+      ...mapActions([
+        'randomizeStocks'
+      ]),
+      endDay () {
+        this.randomizeStocks()
       }
     }
   }

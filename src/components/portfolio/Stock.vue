@@ -9,7 +9,7 @@
       </div>
       <div class="card-body row">
         <div class="col-md-6">
-          <input type="number" class="form-control" placeholder="Quantity" v-model="quantity" :class="{danger: insufficientFunds}">
+          <input type="number" class="form-control" placeholder="Quantity" v-model="quantity" :class="{danger: insufficientQuantity}">
         </div>
         <div class="col-md-6" style="text-align: right">
           <button class="btn btn-success" @click="sellPortStock" :disabled="insufficientQuantity || quantity <= 0 || Number.isInteger(quantity)">{{insufficientQuantity ? 'Not enough Stocks' : 'Sell'}}</button>
