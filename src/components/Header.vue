@@ -33,11 +33,11 @@
         <div class="nav-item mr-sm-2" activeClass="active">
           <a class="nav-link" @click="endDay">End Day <span class="sr-only">(current)</span></a>
         </div>
-        <div class="nav-item dropdown my-2 my-sm-0">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="nav-item dropdown my-2 my-sm-0" @click="isDropdownOpen = !isDropdownOpen">
+          <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" :aria-expanded="isDropdownOpen">
             Save & Load
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          </div>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" :class="{show: isDropdownOpen}">
             <a class="dropdown-item" href="#">Save Data</a>
             <a class="dropdown-item" href="#">Load Data</a>
             <div class="dropdown-divider"></div>
@@ -56,7 +56,11 @@
   import {mapActions} from 'vuex'
 
   export default {
-
+    data () {
+      return {
+        isDropdownOpen: false
+      }
+    },
     computed: {
       funds () {
         return this.$store.getters.funds
