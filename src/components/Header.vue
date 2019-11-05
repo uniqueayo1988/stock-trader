@@ -25,10 +25,6 @@
           </div>
         </li>
       </ul>
-<!--       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
       <div class="form-inline my-2 my-lg-0">
         <div class="nav-item mr-sm-2" activeClass="active">
           <a class="nav-link" @click="endDay">End Day <span class="sr-only">(current)</span></a>
@@ -38,7 +34,7 @@
             Save & Load
           </div>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" :class="{show: isDropdownOpen}">
-            <a class="dropdown-item" href="#">Save Data</a>
+            <a class="dropdown-item" href="#" @click="saveData">Save Data</a>
             <a class="dropdown-item" href="#">Load Data</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>
@@ -72,6 +68,14 @@
       ]),
       endDay () {
         this.randomizeStocks()
+      },
+      saveData () {
+        const data = {
+          funds: this.$store.getters.funds,
+          stockPortfolio: this.$store.getters.stockPortfolio,
+          stocks: this.$store.getters.stocks
+        }
+        this.$http.put('data.json', data)
       }
     }
   }
