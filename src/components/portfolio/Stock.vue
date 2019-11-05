@@ -44,8 +44,6 @@ export default {
         stockPrice: this.stock.price,
         quantity: this.quantity
       }
-      // eslint-disable-next-line no-console
-      console.log(order, '...ord')
       this.sellStock(order)
       this.quantity = 0
     }

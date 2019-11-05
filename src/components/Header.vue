@@ -13,17 +13,6 @@
         <router-link to="/stocks" class="nav-item" activeClass="active" tag="li">
           <a class="nav-link">Stocks</a>
         </router-link>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Save & Load
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Save Data</a>
-            <a class="dropdown-item" href="#">Load Data</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <div class="nav-item mr-sm-2" activeClass="active">
@@ -35,9 +24,7 @@
           </div>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" :class="{show: isDropdownOpen}">
             <a class="dropdown-item" href="#" @click="saveData">Save Data</a>
-            <a class="dropdown-item" href="#">Load Data</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#" @click="fetchData">Load Data</a>
           </div>
         </div>
         <div>
@@ -64,7 +51,8 @@
     },
     methods: {
       ...mapActions([
-        'randomizeStocks'
+        'randomizeStocks',
+        'loadData'
       ]),
       endDay () {
         this.randomizeStocks()
@@ -76,6 +64,9 @@
           stocks: this.$store.getters.stocks
         }
         this.$http.put('data.json', data)
+      },
+      fetchData () {
+        this.loadData()
       }
     }
   }
